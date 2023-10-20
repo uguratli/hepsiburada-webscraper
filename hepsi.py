@@ -32,6 +32,14 @@ def get_pages(url=None, soup=None):
         return [int(x) for x in re.search(r'Önceki(.*?)Sonraki', page.text).group(1).split('/')]
     else:
         return 1, 2
+    
+def get_seller_name(text):
+    """
+    Returns seller."""
+    if re.search(r'Kullanıcı bu ürünü(.*?)satıcısından aldı', text) != None:
+        return re.search(r'Kullanıcı bu ürünü(.*?)satıcısından aldı', text).group(1).strip()
+    else:
+        return None
 def get_reviews(url=None, soup=None):
     """Page reviews collector.
     Returns reviews on given page url or soup."""
